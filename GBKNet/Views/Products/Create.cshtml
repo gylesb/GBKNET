@@ -1,0 +1,22 @@
+﻿@model GBKNet.Models.Product
+
+@{
+    ViewData["Title"] = "Product - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create a New Item</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.LabelFor(model => model.CategoryId)
+    @Html.DropDownList("CategoryId")
+
+    <input type = "submit" value = "Create" class = "btn btn-success" />
+}
+
+@Html.ActionLink("Back to List", "Index")
