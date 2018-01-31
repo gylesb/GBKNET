@@ -1,0 +1,35 @@
+﻿@model GBKNet.Models.Review
+
+@{
+    ViewData["Title"] = "Review - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<hr />
+
+<body>
+
+<h2>Add a review for: </h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Author)
+    @Html.EditorFor(model => model.Author)
+
+    @Html.LabelFor(model => model.ContentBody)
+    @Html.TextBoxFor(model => model.ContentBody)
+    <hr />
+    @Html.LabelFor(model => model.Rating)
+
+    @Html.DropDownListFor(model => model.Rating, Enumerable.Range(1, 5).Select(i => new SelectListItem 
+     { Text = i.ToString(), Value = i.ToString() }),
+       new { placeholder= Html.DisplayNameFor(x => x.Rating), @class = "form-control" } )
+    <br>
+    <input type="hidden" name="ProductId" value="@ViewBag.product.ProductId" />
+    <input type="submit" value="Add Review" class="btn btn-success" />
+}
+<br>
+	<a href="@Url.Action("Index", "Products") "class="btn btn-info">Back to List</a>
+
+</body>

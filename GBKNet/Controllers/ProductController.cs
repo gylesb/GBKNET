@@ -13,12 +13,27 @@ namespace GBKNet.Controllers
 {
     public class ProductController : Controller
     {
-        private GBKNetContext db = new GBKNetContext();
-        public IActionResult Index()
-        {
-            //return View(db.Products.Include(products => products.Product).ToList());
 
-            return View();
+		private IProductRepository productRepo;
+
+        private GBKNetContext db = new GBKNetContext();
+
+		public ProductController(IProductRepository repo = null)
+		{
+			if (repo == null)
+			{
+				this.productRepo = new EFProductRepository();
+			}
+			else
+			{
+				this.productRepo = repo;
+			}
+		}
+
+
+        public ViewResult Index()
+        {
+            return View(db.Products.Include(products => products.Category).ToList());
         }
 
         public IActionResult Details(int ProductId)
